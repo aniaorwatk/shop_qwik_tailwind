@@ -26,7 +26,16 @@ export default component$(() => {
                 <h2 class="text-xl">{state.name}</h2>
                 <p>{state.price}</p>
             </div>
-            <button class="border border-slate-900 border-solid w-full py-2">BUY ITEM</button>
+            <button onClick$={()=>{
+                let currBasket ={items:[]}
+                if(localStorage.getItem('porcelanin-basket')){
+                    currBasket =JSON.parse(localStorage.getItem('porcelanin-basket'))
+                }
+                currBasket.items.push([state])
+                localStorage.setItem('porcelanin-basket', JSON.stringify(currBasket))
+            }
+
+            } class="border border-slate-900 border-solid px-8 mx-auto py-2 hover:opacity-50">BUY ITEM</button>
           
         </div>
     );

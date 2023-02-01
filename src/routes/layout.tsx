@@ -6,12 +6,9 @@ export default component$(() => {
     <>
       <main class="flex-1 flex flex-col relative">
         <Header />
-
           <Slot />
-
       </main>
       <footer>
-
       </footer>
     </>
   );
