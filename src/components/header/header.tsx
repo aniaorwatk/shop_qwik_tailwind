@@ -2,8 +2,15 @@ import { component$, useClientEffect$, useContext, useStore, useWatch$ } from '@
 import { MyContext } from '~/root';
 // import { QwikLogo } from '../icons/qwik';
 
+interface IHeaderType{
+  scrolled: boolean,
+    numItems: number,
+    modal: boolean,
+    cart: []
+}
+
 export default component$(() => {
-  const store = useStore({
+  const store: IHeaderType = useStore({
     scrolled: false,
     numItems: 0,
     modal: false,
@@ -23,7 +30,7 @@ export default component$(() => {
   // })
 
   useWatch$(({ track }) => {
-    const tempCart = track(() => contextState.items)
+    const tempCart = track(() => contextState.items )
     store.numItems = tempCart.length
     store.cart = tempCart
   })
@@ -57,11 +64,11 @@ export default component$(() => {
             {store.cart.map((item, i) => {
               return <div class="bg-white p-4 flex items-center justify-between text-slate-900">
                 <div class="flex flex-col gap-1">
-                  <h2>{item.name}</h2>
-                  <p class="text-xs">PLN {item.price}</p>
+                  <h2>{item?.name}</h2>
+                  <p class="text-xs">PLN {item?.price}</p>
                 </div>
                 <i onClick$={() => {
-                  contextState.items = contextState.items.reduce((acc, curr, index) => {
+                  contextState.items = contextState.items.reduce((acc: any, curr: any, index: number) => {
                     if (index !== i) {
                       return [...acc, curr]
                     } return acc
