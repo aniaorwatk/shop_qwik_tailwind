@@ -1,4 +1,4 @@
-import { component$, useClientEffect$, useContext, useStore, useWatch$ } from '@builder.io/qwik';
+import { component$, useClientEffect$, useContext, useStore, useTask$, useWatch$ } from '@builder.io/qwik';
 import { MyContext } from '~/root';
 // import { QwikLogo } from '../icons/qwik';
 
@@ -6,7 +6,7 @@ interface IHeaderType{
   scrolled: boolean,
     numItems: number,
     modal: boolean,
-    cart: []
+    cart: any[] 
 }
 
 export default component$(() => {
@@ -28,12 +28,19 @@ export default component$(() => {
   //     store.cart =currBasket.items
   //   }
   // })
+useTask$(({track})=>{
+ 
+  const tempCart = track(() => contextState.items )
+  console.log(contextState.items )
+  store.numItems = tempCart.length
+  store.cart = tempCart
+})
+  // useWatch$(({ track }) => {
 
-  useWatch$(({ track }) => {
-    const tempCart = track(() => contextState.items )
-    store.numItems = tempCart.length
-    store.cart = tempCart
-  })
+  //   const tempCart = track(() => contextState.items )
+  //   store.numItems = tempCart.length
+  //   store.cart = tempCart
+  // })
 
   return (
     <header class={"fixed top-0 left-0 w-full flex justify-between items-center p-4 text-white text-xl sm:text-4xl sm:p-8 z-20" + (store.scrolled ? " bg-slate-700 shadow" : " bg-transparent")}

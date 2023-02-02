@@ -6,7 +6,7 @@ import globalStyles from './global.css?inline';
 export const MyContext =createContext('my-context')
 
 export interface ITypeRoot{
-  items?:  object | any[]
+  items?:  any[] | object |undefined
 }
 
 // export interface ITypeRoot{
@@ -15,8 +15,8 @@ export interface ITypeRoot{
 
 export default component$(() => {
 
-  const state: ITypeRoot =useStore({
-    items:[{}]
+  const state =useStore({
+    items:[]
   })
 
 useContextProvider(MyContext,state)

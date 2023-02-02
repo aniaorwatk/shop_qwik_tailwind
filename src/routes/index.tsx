@@ -10,7 +10,7 @@ export default component$(() => {
 
   useClientEffect$(()=>{
     if (localStorage.getItem('porcelanin-basket')){
-        contextState.items =[...JSON.parse(localStorage.getItem('porcelanin-basket')).items]
+        contextState.items =[...JSON.parse(localStorage.getItem('porcelanin-basket') as string).items]
     }
 })
 
