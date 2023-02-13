@@ -8,8 +8,6 @@ export default component$(() => {
         <Header />
           <Slot />
       </main>
-      <footer>
-      </footer>
     </>
   );
 });

@@ -1,12 +1,13 @@
 import { component$, useClientEffect$, useContext, useStore } from '@builder.io/qwik';
-import { DocumentHead, useContent, useLocation } from '@builder.io/qwik-city';
+import { useLocation } from '@builder.io/qwik-city';
 import { MyContext } from '~/root';
 import { ITypeRoot } from '~/root';
 
-interface ITypePorcelan {
+export interface ITypePorcelan {
+    items?: any[];
     name?: string,
     price?: string,
-    url?: string 
+    url?: string
 }
 
 
@@ -15,13 +16,13 @@ export default component$(() => {
     const loc = useLocation();
 
     const state: ITypePorcelan = useStore({
+        items: [],
         name: "",
         price: "",
         url: ""
     });
 
     const contextState: ITypeRoot = useContext(MyContext)
-
 
     useClientEffect$(() => {
         const stringLocalStorage = localStorage.getItem("porc") as string
@@ -53,7 +54,7 @@ export default component$(() => {
                 }
                 [...currBasket.items, state]
                 localStorage.setItem('porcelanin-basket', JSON.stringify(currBasket))
-                contextState.items = [...(contextState.items as []), state]
+                contextState.items = [...(contextState.items), state]
             }
             } class="border border-slate-900 border-solid px-8 mx-auto py-2 hover:opacity-50">BUY ITEM</button>
         </div> : null
